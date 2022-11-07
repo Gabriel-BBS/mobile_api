@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Pesquisa CEP</title>
+    </head>
+    <body>
+
+        <input type="text" name="cep" id="cep">
+        <button type="button" id="pesquisarCEP">Pesquisar CEP</button>
+        
+        <span id="loading" style="display:none;">[Carregando...]</span>
+
+        <hr>
+
+        id: <strong><span id="id"></span></strong><br/>
+        email: <strong><span id="email"></span></strong><br/>
+        first_name: <strong><span id="first_name"></span></strong><br/>
+      
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script>
+            $("#pesquisarCEP").on("click", function(){
+
+                var loading = $("#loading");
+                var cep = $("#cep").val();
+                loading.show();
+                $.ajax({
+                    url: "https://reqres.in/api/users?id="+cep,
+                    crossDomain: true,
+                    async: true,
+                    type: "GET",
+                    dataType: "json",
+                    success: function (data) {
+
+                        if(data.erro !== undefined){
+                            alert("CEP inválido ou não encontrado");
+                        }else{
+                            $("#id").text(data.data.id);
+                            $("#email").text(data.data.email);
+                            $("#first_name").text(data.data.first_name);
+                        }
+                    },
+                    error: function(data){
+                        alert("Algum erro ocorreu, consulte o log.");
+                    },
+                    complete: function(){
+                        loading.hide();
+                    }
+                });
+
+            });
+        </script>
+    </body>
+</html>
