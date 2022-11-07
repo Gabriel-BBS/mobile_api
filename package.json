@@ -1,0 +1,24 @@
+{
+  "name": "empresas_api",
+  "version": "1.0.0",
+  "description": "app para obter informações sobre empresas Recife",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gabriel-BBS/mobile_api.git" 
+  },
+  "author": "Gabriel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Gabriel-BBS/mobile_api/issues"
+  },
+  "homepage": "https://github.com/Gabriel-BBS/mobile_api#readme",
+  "dependencies": {
+    "bootstrap": "^5.2.2",
+    "express": "^4.18.2",
+    "nodemon": "^2.0.20"
+  }
+}
