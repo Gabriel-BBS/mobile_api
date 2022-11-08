@@ -4,31 +4,57 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Pesquisa CEP</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <link rel="stylesheet" href="../css/style.css">
+        <title>Pesquisa de Usuário</title>
     </head>
     <body>
+        <div class="container">
+            <div class="col-6 box">
+                <div class="row search">
+                    <div class="item">
+                        <h3>Pesquisa de Usuários cadastrados</h3>
+                    </div>
+                    <div class="item">
+                        <input type="text" name="id" id="id" placeholder="digite um ID">
+                    </div>
+                    <div class="item">
+                        <button class="btn btn-primary" type="button" id="pesquisar">Pesquisar Usuário</button>
+                        <span id="loading" style="display:none;">[Carregando...]</span>
+                    </div>
+                </div>
+            </div>
 
-        <input type="text" name="cep" id="cep">
-        <button type="button" id="pesquisarCEP">Pesquisar CEP</button>
+        </div>
         
-        <span id="loading" style="display:none;">[Carregando...]</span>
-
         <hr>
+        <div class="item">
+            id: <strong><span id="ident"></span></strong>
+        </div>
+        <div class="item">
+            email: <strong><span id="email"></span></strong>
+        </div>
+        <div class="item">
+            first_name: <strong><span id="first_name"></span></strong>
+        </div>
+        <div class="item">
+            last_name: <strong><span id="last_name"></span></strong>
+        </div>
+        <div class="item">
+            avatar: <br><img id="avatar" alt="foto">
+        </div>
 
-        id: <strong><span id="id"></span></strong><br/>
-        email: <strong><span id="email"></span></strong><br/>
-        first_name: <strong><span id="first_name"></span></strong><br/>
       
-
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script>
-            $("#pesquisarCEP").on("click", function(){
+            $("#pesquisar").on("click", function(){
 
                 var loading = $("#loading");
-                var cep = $("#cep").val();
+                var id = $("#id").val();
                 loading.show();
                 $.ajax({
-                    url: "https://reqres.in/api/users?id="+cep,
+                    url: "https://reqres.in/api/users?id="+id,
                     crossDomain: true,
                     async: true,
                     type: "GET",
@@ -36,11 +62,13 @@
                     success: function (data) {
 
                         if(data.erro !== undefined){
-                            alert("CEP inválido ou não encontrado");
+                            alert("ID inválido ou não encontrado");
                         }else{
-                            $("#id").text(data.data.id);
+                            $("#ident").text(data.data.id);
                             $("#email").text(data.data.email);
                             $("#first_name").text(data.data.first_name);
+                            $("#last_name").text(data.data.last_name);
+                            $("#avatar").attr("src", data.data.avatar);
                         }
                     },
                     error: function(data){

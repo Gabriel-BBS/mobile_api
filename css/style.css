@@ -1,0 +1,13 @@
+.box{
+    width: 80%;
+    margin: auto;
+}
+
+.row.search{
+    display: flex;
+    margin: 10px auto 0;
+}
+.item{
+    margin: 10px auto;
+    text-align: center;
+}
